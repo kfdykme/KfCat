@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content"
+	android:background="?attr/colorPrimary"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<NumberPicker
+			android:id="@+id/fragment_number_picker_NumberPicker"
+			android:layout_height="80dp"
+			android:layout_width="wrap_content"/>
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:background="?attr/colorPrimaryDark"/>
+
+		<LinearLayout
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/fragment_number_picker_TextView_value"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:text=" value"
+				android:textColor="?attr/colorPrimaryDark"
+				android:gravity="center"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/fragment_number_picker_TextView_sure"
+		android:layout_marginLeft="140dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/colorPrimaryDark"
+		android:text="Sure"
+		android:gravity="center"
+		android:padding="10dp"
+		android:textColor="?attr/colorPrimary"/>
+
+</LinearLayout>
+
