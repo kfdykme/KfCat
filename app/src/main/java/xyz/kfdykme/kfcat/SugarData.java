@@ -3,7 +3,7 @@ import com.orm.*;
 
 public class SugarData extends SugarRecord
 {
-	String cache;
+	public String cache;
 
 	public SugarData(){
 

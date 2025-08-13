@@ -1,15 +1,18 @@
 package xyz.kfdykme.kfcat.activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import xyz.kfdykme.kfcat.*;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.orm.SugarContext;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.support.design.widget.*;
 import android.view.View.*;
 import android.view.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import xyz.kfdykme.kfcat.presenter.*;
 
 public class KfCatTimerHelperActivity extends AppCompatActivity

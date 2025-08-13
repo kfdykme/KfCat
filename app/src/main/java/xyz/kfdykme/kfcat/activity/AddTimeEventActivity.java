@@ -2,9 +2,6 @@ package xyz.kfdykme.kfcat.activity;
 
 
 import android.os.*;
-import android.support.v7.app.*;
-
-import android.support.v7.widget.Toolbar;
 import android.view.View.*;
 import android.view.*;
 import android.widget.*;
@@ -14,6 +11,10 @@ import xyz.kfdykme.kfcat.fragment.*;
 import android.content.*;
 import org.greenrobot.eventbus.*;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.orm.*;
 import xyz.kfdykme.kfcat.util.*;
 
@@ -55,7 +56,7 @@ public class AddTimeEventActivity extends AppCompatActivity
 		toolbar.setTitle("");
 
 
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 //		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
 		toolbar.setNavigationOnClickListener(new OnClickListener(){
 

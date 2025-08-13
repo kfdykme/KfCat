@@ -1,7 +1,10 @@
 package xyz.kfdykme.kfcat.activity;
-import android.support.v7.app.*;
+
 import android.os.*;
-import android.support.v7.widget.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import xyz.kfdykme.kfcat.*;
 
 public class KfCatSettingsActivity extends AppCompatActivity

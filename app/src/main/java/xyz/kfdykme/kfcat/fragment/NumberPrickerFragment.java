@@ -1,5 +1,5 @@
 package xyz.kfdykme.kfcat.fragment;
-import android.support.v4.app.DialogFragment;
+//import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,6 +8,9 @@ import xyz.kfdykme.kfcat.R;
 import android.widget.*;
 import android.widget.NumberPicker.*;
 import android.util.*;
+
+import androidx.fragment.app.DialogFragment;
+
 import org.greenrobot.eventbus.*;
 
 public class NumberPrickerFragment extends DialogFragment

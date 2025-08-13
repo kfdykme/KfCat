@@ -1,11 +1,12 @@
 package xyz.kfdykme.kfcat.view;
-import android.widget.ImageView;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.graphics.drawable.AnimationDrawable;
+import android.widget.ImageView;
+
 import xyz.kfdykme.kfcat.R;
 
-public class KfCat extends android.support.v7.widget.AppCompatImageView
+public class KfCat extends androidx.appcompat.widget.AppCompatImageView
 {
 
 
@@ -55,11 +56,6 @@ public class KfCat extends android.support.v7.widget.AppCompatImageView
 		setImageDrawable(anim);
 		anim.start();
 
-//		 vAnim = ObjectAnimator.ofFloat(mImageView,"x",0,mImageView.getWidth()/2,0);
-//		vAnim.setDuration(3000);
-//		vAnim.setRepeatCount(ValueAnimator.INFINITE);
-//		vAnim.setRepeatMode(ValueAnimator.REVERSE);
-//		vAnim.start();
 	}
 
 }

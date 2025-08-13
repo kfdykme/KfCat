@@ -1,36 +1,71 @@
-apply plugin: 'com.android.application'
+// 1. 声明插件（Kotlin DSL 推荐使用 plugins 块，替代 apply plugin）
+plugins {
+    id("com.android.application")          // Android 应用插件
+    id("kotlin-android")                   // Kotlin 核心支持
+}
+
+// 2. 定义变量（可选，提升可读性）
+var kotlinVersion = "1.9.10"               // Kotlin 版本（根据实际需求调整）
 
 android {
-    namespace "xyz.kfdykme.kfcat"
-    compileSdkVersion 35
-//    buildToolsVersion "25.0.3"
+    // 3. Android 基础配置（Kotlin DSL 支持属性简化，如 compileSdkVersion → compileSdk）
+    namespace = "xyz.kfdykme.kfcat"         // 包名（Android 12+ 必须声明）
+    compileSdk = 35                         // 编译 SDK 版本（AGP 7.0+ 支持直接赋值，无需 Version 后缀）
+
     defaultConfig {
-        applicationId "xyz.kfdykme.kfcat"
-        minSdkVersion 35
-//        targetSdkVersion 35
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId = "xyz.kfdykme.kfcat"  // 应用 ID
+        minSdk = 35                          // 最小 SDK 版本
+        targetSdk = 35                       // 目标 SDK 版本（原注释中未启用，这里显式设置）
+        versionCode = 1                      // 版本号
+        versionName = "1.0"                  // 版本名
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"  // 测试运行器（原 support 库已弃用，改用 androidx）
     }
+
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        getByName("release") {               // 获取 release 构建类型（Kotlin 支持 getByName 简化写法）
+            minifyEnabled = false            // 是否启用混淆
+            proguardFiles(                     // 混淆文件配置
+                    getDefaultProguardFile("proguard-android-optimize.txt"),  // 默认优化混淆文件
+                    "proguard-rules.pro"         // 自定义混淆规则
+            )
         }
+    }
+    buildFeatures {
+        viewBinding = true  // 启用 View Binding
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
     }
 }
 
+// 4. 依赖管理（Kotlin DSL 使用括号包裹依赖字符串）
 dependencies {
-//    compile fileTree(include: ['*.jar'], dir: 'libs')
-//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-//        exclude group: 'com.android.support', module: 'support-annotations'
-//    })
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
-    implementation 'com.android.support:design:28.0.0'
-//    implementation 'junit:junit:4.12'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.squareup.okhttp:okhttp:2.0.0'
-    implementation 'com.github.satyan:sugar:1.5'
-    implementation 'org.greenrobot:eventbus:3.3.1'
+    // Kotlin 标准库
+    //noinspection GradleDependency
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+
+    // 协程（异步编程）
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+
+    // AndroidX 基础库（原 support 库已弃用，替换为 androidx）
+    implementation("androidx.appcompat:appcompat:1.7.1")          // 替代 com.android.support:appcompat-v7:28.0.0
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")  // 替代 com.android.support.constraint:constraint-layout:2.0.4
+    implementation("com.google.android.material:material:1.12.0")     // 替代 com.android.support:design:28.0.0
+
+    // 工具库（保留原逻辑，替换为新版本或兼容库）
+    implementation("com.google.code.gson:gson:2.10.1")               // JSON 解析
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")             // 替代 com.squareup.okhttp:okhttp:2.0.0（新版 OkHttp）
+    implementation("com.github.satyan:sugar:1.5")                    // ORM 库（注意：SugarORM 已停止维护，推荐 Room）
+    implementation("org.greenrobot:eventbus:3.3.1")
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'// 事件总线
+
+    // 测试依赖（原注释中未启用，按需添加）
+    // testImplementation("junit:junit:4.13.2")                        // JUnit 测试
+    // androidTestImplementation("androidx.test.ext:junit:1.1.5")     // AndroidJUnit 测试
+    // androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")  // Espresso UI 测试
 }
