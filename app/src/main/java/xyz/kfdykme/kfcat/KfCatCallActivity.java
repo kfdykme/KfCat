@@ -2,7 +2,9 @@ package xyz.kfdykme.kfcat;
 
 import android.app.*;
 import android.content.*;
+import android.net.Uri;
 import android.os.*;
+import android.provider.Settings;
 import android.support.design.widget.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
@@ -157,7 +159,17 @@ public class KfCatCallActivity extends AppCompatActivity {
 				public void onClick(View view) {
 
 					loadSetting();
-					switchService();
+					if (!Settings.canDrawOverlays(getApplicationContext())) { // 判断是否有系统窗口权限
+						// 跳转到系统设置页，引导用户手动授权
+						Intent intent = new Intent(
+								Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+								Uri.parse("package:$packageName")
+						);
+						startActivity(intent);
+					} else {
+
+						switchService();
+					}
 					//EventBus.getDefault().postSticky(new Call2ServiceEvent(mSetting,isNotBye));
 
 				}
@@ -207,7 +219,7 @@ public class KfCatCallActivity extends AppCompatActivity {
 			stopService(i);
 		} else {
 			saveData();
-			startService(i);
+			startForegroundService(i);
 			isNotBye = true;
 		Snackbar.make(mSeekBarScale, "Click again to stop.", Snackbar.LENGTH_LONG)
 			.setAction("Action", null).show();
@@ -230,9 +242,9 @@ public class KfCatCallActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_call);
+        setContentView(R.layout.activity_call0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitleTextColor(R.color.colorPrimaryDark);
+//		toolbar.setTitleTextColor(R.color.colorPrimaryDark);
 
         setSupportActionBar(toolbar);
 
@@ -262,14 +274,14 @@ public class KfCatCallActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
      	switch(item.getItemId()){
-			case R.id.action_about:
-				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
-				break;
-			case R.id.action_help:
-
-				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
-
-				break;
+//			case R.id.action_about:
+//				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
+//				break;
+//			case R.id.action_help:
+//
+//				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
+//
+//				break;
 		}
 
         return super.onOptionsItemSelected(item);

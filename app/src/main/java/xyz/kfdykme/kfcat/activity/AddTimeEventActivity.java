@@ -56,7 +56,7 @@ public class AddTimeEventActivity extends AppCompatActivity
 
 
         setSupportActionBar(toolbar);
-		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
+//		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
 		toolbar.setNavigationOnClickListener(new OnClickListener(){
 
 				@Override

@@ -71,14 +71,14 @@ public class KfCatTimerHelperActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
      	switch(item.getItemId()){
-			case R.id.action_about:
-				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
-				break;
-			case R.id.action_help:
+//			case R.id.action_about:
+//				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
+//				break;
+//			case R.id.action_help:
+//
+//				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
 
-				Toast.makeText(getApplicationContext(),"还没有写啦",Toast.LENGTH_SHORT).show();
-
-				break;
+//				break;
 		}
 
         return super.onOptionsItemSelected(item);

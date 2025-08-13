@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xyz.kfdykme.kfcat">
 
-
+    <!-- 允许应用显示系统级悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CallActivity"
+            android:name=".KfCatCallActivity"
             android:label="@string/app_name"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +33,9 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <service
-            android:name=".KfCatService"/>s
+            android:name=".KfCatService"
+            android:foregroundServiceType="dataSync"
+            />
 
 
     </application>

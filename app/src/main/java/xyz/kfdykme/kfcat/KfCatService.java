@@ -1,4 +1,7 @@
 package xyz.kfdykme.kfcat;
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+import static android.app.PendingIntent.FLAG_MUTABLE;
+
 import android.app.*;
 import android.os.*;
 import android.content.*;
@@ -52,8 +55,7 @@ public class KfCatService extends Service
 
 		mWindowManager  = (WindowManager) getApplication()
 			.getSystemService(
-			getApplication()
-			.WINDOW_SERVICE);
+			WINDOW_SERVICE);
 
 		wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
 		wmParams.format = PixelFormat.RGBA_8888;
@@ -66,19 +68,14 @@ public class KfCatService extends Service
 
 		mView = (ArcMenu) inflater.inflate(R.layout.view_kfcat,null);
 
-
+        wmParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY; // 高版本专用类型;
+        // 其他参数（如宽度、高度、位置等）
+		wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+		wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL ;
+		wmParams.format = PixelFormat.TRANSLUCENT;
 
 		mKfCat = (KfCat)mView.findViewById(R.id.view_kfcat_ImageView);
-
-//		if(mView.getCurrentStatus() == ArcMenu.Status.CLOSE){
-//			wmParams.width = mKfCat.getWidth();
-//			wmParams.height = mKfCat.getHeight();
-//		} else {
-//			wmParams.width = mView.getHeight() + mView.getChildAt(1).getHeight();
-//			wmParams.height = wmParams.width;
-//		}
-		wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		wmParams.height =WindowManager.LayoutParams.WRAP_CONTENT;
 
 		mWindowManager.addView(mView,wmParams);
 
@@ -265,8 +262,6 @@ public class KfCatService extends Service
 	@Override
 	public void onDestroy()
 	{
-		//EventBus.getDefault().unregister(this);
-
 		if(mView != null)
 		{
 
@@ -285,16 +280,28 @@ public class KfCatService extends Service
 
 	}
 
-	@Override
+    @Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
 
+		String channelId = "life.kfdykme.kcat.service";
+		String channelName = "KfCat 服务通道"; // 渠道名称（用户可见）
+		int importance = NotificationManager.IMPORTANCE_LOW; // 重要性（决定通知是否弹出）
 
+		NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+		// 可选配置（根据需求调整）
+		channel.setDescription("KfCat 后台服务状态通知"); // 渠道描述（用户可见）
+		channel.enableLights(false); // 关闭呼吸灯
+		channel.setSound(null, null); // 关闭通知声音
+		channel.enableVibration(false); // 关闭震动
+		// 获取系统通知管理器并创建渠道
+		NotificationManager notificationManager = getSystemService(NotificationManager.class);
+		notificationManager.createNotificationChannel(channel);
 		PendingIntent pendingintent = PendingIntent.getActivity(this
 				,0
 				,new Intent(this,KfCatCallActivity.class)
-				,0);
-		Notification.Builder builder = new Notification.Builder(getApplicationContext());
+				,FLAG_IMMUTABLE);
+		Notification.Builder builder = new Notification.Builder(getApplicationContext(), channelId);
 
 		builder.setSmallIcon(R.drawable.image_launcher)
 			.setContentTitle("KfCat")
@@ -306,7 +313,7 @@ public class KfCatService extends Service
 
 		startForeground(0x111,builder.build());
 
-		return super.onStartCommand(intent, flags, startId);
+		return START_STICKY;
 	}
 
 

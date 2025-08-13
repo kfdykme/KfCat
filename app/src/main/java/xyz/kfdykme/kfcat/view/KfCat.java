@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.graphics.drawable.AnimationDrawable;
 import xyz.kfdykme.kfcat.R;
 
-public class KfCat extends ImageView
+public class KfCat extends android.support.v7.widget.AppCompatImageView
 {
 
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kfdykme.kfcat.view.ArcMenu
+<xyz.kfdykme.kfcat.view.ArcMenu
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:hyman="http://schemas.android.com/apk/res/xyz.kfdykme.kfcat"
 	android:id="@+id/view_kfcat_ArcMenu"
 	android:layout_width="100dp"
 	android:layout_height="100dp"
-	android:background="#cccccc"
+	android:background="@android:color/transparent"
 	hyman:radius="100dp" >
 
-	<com.kfdykme.kfcat.view.KfCat
+	<xyz.kfdykme.kfcat.view.KfCat
 		android:id="@+id/view_kfcat_ImageView"
 		android:layout_height="50dp"
 		android:layout_width="50dp"
@@ -36,6 +36,6 @@
 		android:tag="Sun"/>
 
 
-</com.kfdykme.kfcat.view.ArcMenu>
+</xyz.kfdykme.kfcat.view.ArcMenu>
  
 
